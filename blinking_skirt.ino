@@ -13,16 +13,17 @@ int led2 = 6;
 void setup() 
 {
   Serial.begin(9600);
-  while (!Serial);
   Serial.println("Started serial monitor");
+  
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  
   // Try to initialise and warn if we couldn't detect the chip
   if (!lsm.begin())
   {
     Serial.println("Oops ... unable to initialize the LSM303. Check your wiring!");
     while (1);
   }
-  pinMode(led1, OUTPUT);
-  pinMode(led2, OUTPUT);
 }
 
 void loop() 
@@ -50,26 +51,30 @@ void loop()
   newVector += lsm.accelData.y*lsm.accelData.y;
   newVector += lsm.accelData.z*lsm.accelData.z;
   newVector = sqrt(newVector);
-  Serial.print("New Len: "); Serial.println(newVector);
+  Serial.print("New Len: ");
+  Serial.println(newVector);
   
   // are we moving 
   if (abs(newVector - storedVector) > MOVE_THRESHOLD) {
     Serial.println("Twinkle!");
-//    digitalWrite(led1, HIGH);   // turn the LED on (HIGH is the voltage level)
-//    digitalWrite(led2, HIGH);
-    for (int i = 0; i <= 64; i++) {
-    analogWrite(led1, i);
-    analogWrite(led2, i);
-    delay(10);
-    }
-    delay(100);
-//    digitalWrite(led1, LOW);   // turn the LED off (LOW is the voltage level)
-//    digitalWrite(led2, LOW);
-    for (int i = 64; i >= 0; i--) {
-    analogWrite(led1, i);
-    analogWrite(led2, i);
-    delay(10);
-    }
+
+//    for (int i = 0; i <= 64; i++) {
+//      analogWrite(led1, i);
+//      analogWrite(led2, i);
+//      delay(10);
+//    }
+//    delay(100);
+//
+//    for (int i = 64; i >= 0; i--) {
+//      analogWrite(led1, i);
+//      analogWrite(led2, i);
+//      delay(10);
+//    }
+    digitalWrite(led1, HIGH);
+    digitalWrite(led2, HIGH);
+    delay(500);
+    digitalWrite(led1, LOW);
+    digitalWrite(led2, LOW);
   } else {
     Serial.println("No Twinkling");
   }
