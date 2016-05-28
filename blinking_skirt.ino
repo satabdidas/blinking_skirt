@@ -44,7 +44,7 @@ void loop()
   Serial.println(storedVector);
   Serial.println("Wait a bit");
   // wait a bit
-  delay(100);
+  delay(1000);
  
  // get new data!
   Serial.println("Reading lsm");
@@ -77,7 +77,9 @@ void loop()
     delay(500);
     digitalWrite(led1, LOW);
     digitalWrite(led2, LOW);
+    delay(500);
   } else {
     Serial.println("No Twinkling");
+    delay(1000);
   }
 }
