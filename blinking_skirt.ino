@@ -1,3 +1,5 @@
+/* Code taken from https://learn.adafruit.com/sparkle-skirt/code and then modified a little to suit my purpose*/
+
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_LSM303.h>
